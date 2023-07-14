@@ -1,0 +1,9 @@
+{
+    "azureAutomation.directory.basePath": "c:\\Users\\ningr",
+    "azureFunctions.deploySubpath": "Api/bin/Release/net6.0/publish",
+    "azureFunctions.projectLanguage": "C#",
+    "azureFunctions.projectRuntime": "~4",
+    "debug.internalConsoleOptions": "neverOpen",
+    "azureFunctions.preDeployTask": "publish (functions)",
+    "dotnet.defaultSolution": "ContactUs.sln"
+}

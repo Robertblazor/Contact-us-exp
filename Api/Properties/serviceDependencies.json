@@ -1,0 +1,13 @@
+{
+    "dependencies": {
+      "storage1": {
+        "type": "storage",
+        "connectionId": "AzureWebJobsStorage"
+      },
+      "appInsights1": {
+        "type": "appInsights",
+        "connectionId": "endpoint=https://contact-us-service.communication.azure.com/;accesskey=2TkNEpmNBd3XGw0Mpbjmzbv1sQ+Th68W3ClPSl/1+t6wdoVrZrXsnlpgYnsixuqCcvr9UKBWIIwqPrbeycWP3w==",
+        "dynamicId": null
+      }
+    }
+  }
