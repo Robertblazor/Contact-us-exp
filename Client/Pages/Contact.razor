@@ -319,7 +319,7 @@ else if (isSent)
             <p class="error">Please enter a message.</p>
         }
     </div>
-    <button type="reset" disabled="@(!IsValidForm())" @onclick="SendEmails">Send</button>
+    <button type="reset" disabled="@(!IsValidForm())" @onclick="@(async ()=>{await SendEmails();<pop-up here>})" >Send</button>
 </form>
 
 @code {
