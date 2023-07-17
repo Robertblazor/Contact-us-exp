@@ -1,294 +1,3 @@
-@* @page "/contact"
-@using System.Net.Http.Json
-@using System.Threading.Tasks
-
-<h1>Contact Us</h1>
-
-@if (isSending)
-{
-    <p>Sending message...</p>
-}
-else if (isSent)
-{
-    <p>Message sent!</p>
-}
-
-<form>
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" @bind-value="name" required />
-        @if (name == null || name.Trim() == "")
-        {
-            <p class="error">Please enter your name.</p>
-        }
-    </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" @bind-value="email" required />
-        @if (email == null || email.Trim() == "")
-        {
-            <p class="error">Please enter your email address.</p>
-        }
-        else if (!IsValidEmail(email))
-        {
-            <p class="error">Please enter a valid email address.</p>
-        }
-    </div>
-    <div>
-        <label for="message">Message:</label>
-         <InputTextArea @bind-Value="message" style=" width: 100%; height: 60vh; min-height: 100px;" />
-        @if (message == null || message.Trim() == "")
-        {
-            <p class="error">Please enter a message.</p>
-        }
-    </div>
-    <button type="submit" disabled="@(!IsValidForm())" @onclick="Tester">Send</button>
-</form> 
-
-@code {
-    private string name{get;set;}
-    private string email{get;set;}
-    private string message{get;set;}
-    private bool isSending{get;set;}
-    private bool isSent{get;set;}
-    private string errorMessage{get;set;}
-
-    private async Task SendEmails()
-    {
-        isSending = true;
-        System.Console.WriteLine("Sending message...");
-        var httpClient = new HttpClient();
-        try
-        {
-            var response = await httpClient.PostAsJsonAsync("http://localhost:7071/api/SendEmails", new { name, email, message });
-            isSending = false;
-            isSent = response.IsSuccessStatusCode;
-            if (!isSent)
-            {
-                errorMessage = "Failed to send message. Please try again later.";
-            }
-            
-        }
-        catch (Exception)
-        {
-            isSending = false;
-            errorMessage = "An error occurred while sending the message. Please try again later.";
-        }
-    }
-
-    private void Tester(){
-        System.Console.WriteLine("Hello World");
-    }
-
-    private bool IsValidEmail(string email)
-    {
-        try
-        {
-            var addr = new System.Net.Mail.MailAddress(email);
-            return addr.Address == email;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
-    private bool IsValidForm()
-    {
-        return name != null && name.Trim() != "" && email != null && email.Trim() != "" && IsValidEmail(email) && message != null && message.Trim() != "";
-    }
-} *@
-
-@* @page "/contact"
-<form>
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" @bind-value="name" />
-        @if (string.IsNullOrWhiteSpace(name))
-        {
-            <p class="error">Please enter your name.</p>
-        }
-    </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" @bind-value="email" />
-        @if (string.IsNullOrWhiteSpace(email))
-        {
-            <p class="error">Please enter your email address.</p>
-        }
-        else if (!IsValidEmail(email))
-        {
-            <p class="error">Please enter a valid email address.</p>
-        }
-    </div>
-    <div>
-        <label for="message">Message:</label>
-        <InputTextArea @bind-Value="message" style=" width: 100%; height: 60vh; min-height: 100px;" />
-        @if (string.IsNullOrWhiteSpace(message))
-        {
-            <p class="error">Please enter a message.</p>
-        }
-    </div>
-    <button type="button" disabled="@(!IsValidForm())" @onclick="SendEmails">Send</button>
-</form>
-
-@code {
-    private string name { get; set; }
-    private string email { get; set; }
-    private string message { get; set; }
-    private bool isSending { get; set; }
-    private bool isSent { get; set; }
-    private string errorMessage { get; set; }
-
-    private async Task SendEmails()
-    {
-        isSending = true;
-        try
-        {
-            var emailData = new
-            {
-                Name = name,
-                Email = email,
-                Message = message
-            };
-            var client = new HttpClient();
-            var response = await client.PostAsJsonAsync("http://localhost:7071/api/SendEmails", new {name, email, message});
-            response.EnsureSuccessStatusCode();
-            isSent = true;
-        }
-        catch (Exception ex)
-        {
-            errorMessage = ex.Message;
-        }
-        finally
-        {
-            isSending = false;
-        }
-    }
-
-    private bool IsValidForm()
-    {
-        return !string.IsNullOrWhiteSpace(name) &&
-               !string.IsNullOrWhiteSpace(email) &&
-               IsValidEmail(email) &&
-               !string.IsNullOrWhiteSpace(message);
-    }
-
-    private bool IsValidEmail(string email)
-    {
-        try
-        {
-            var addr = new System.Net.Mail.MailAddress(email);
-            return addr.Address == email;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-} *@
-
-@* <form>
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" @bind-value="name" />
-        @if (string.IsNullOrWhiteSpace(name))
-        {
-            <p class="error">Please enter your name.</p>
-        }
-    </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" @bind-value="email" />
-        @if (string.IsNullOrWhiteSpace(email))
-        {
-            <p class="error">Please enter your email address.</p>
-        }
-        else if (!IsValidEmail(email))
-        {
-            <p class="error">Please enter a valid email address.</p>
-        }
-    </div>
-    <div>
-        <label for="message">Message:</label>
-        <textarea id="message" @bind-value="message"></textarea>
-        @if (string.IsNullOrWhiteSpace(message))
-        {
-            <p class="error">Please enter a message.</p>
-        }
-    </div>
-    <button type="submit" disabled="@(!IsValidForm())" @onclick="SendEmails">Send</button>
-    @if (isSending)
-    {
-        <p>Sending email...</p>
-    }
-    else if (isSent)
-    {
-        <p>Email sent successfully!</p>
-    }
-    else if (!string.IsNullOrWhiteSpace(errorMessage))
-    {
-        <p class="error">@errorMessage</p>
-    }
-</form>
-
-@code {
-    private string name { get; set; }
-    private string email { get; set; }
-    private string message { get; set; }
-    private bool isSending { get; set; }
-    private bool isSent { get; set; }
-    private string errorMessage { get; set; }
-
-    private async Task SendEmails()
-    {
-        isSending = true;
-        try
-        {
-            var emailData = new
-            {
-                Name = name,
-                Email = email,
-                Message = message
-            };
-            var client = new HttpClient();
-            var response = await client.PostAsJsonAsync("https://example.com/api/send-email", emailData);
-            response.EnsureSuccessStatusCode();
-            isSent = true;
-        }
-        catch (Exception ex)
-        {
-            errorMessage = ex.Message;
-        }
-        finally
-        {
-            isSending = false;
-        }
-    }
-
-    private bool IsValidForm()
-    {
-        return !string.IsNullOrWhiteSpace(name) &&
-               !string.IsNullOrWhiteSpace(email) &&
-               IsValidEmail(email) &&
-               !string.IsNullOrWhiteSpace(message);
-    }
-
-    private bool IsValidEmail(string email)
-    {
-        try
-        {
-            var addr = new System.Net.Mail.MailAddress(email);
-            return addr.Address == email;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-} *@
-
-
 @page "/contact"
 <form>
     <div>
@@ -319,20 +28,38 @@ else if (isSent)
             <p class="error">Please enter a message.</p>
         }
     </div>
-    <button type="reset" disabled="@(!IsValidForm())" @onclick="@(async ()=>{await SendEmails();<pop-up here>})" >Send</button>
+    <button type="reset" disabled="@(!IsValidForm() || isLoading)" @onclick="@(async ()=>{await SendEmails();})" >
+        @if (isLoading)
+        {
+            <span class="spinner"></span>
+        }
+        else if (isSent)
+        {
+            <span> Message  Sent</span>
+        }
+        else 
+        {
+            <span>  Send</span>
+        }
+    </button>
 </form>
+
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <p class="error">@errorMessage</p>
+}
 
 @code {
     private string name { get; set; }
     private string email { get; set; }
     private string message { get; set; }
-    private bool isSending { get; set; }
+    private bool isLoading { get; set; }
     private bool isSent { get; set; }
     private string errorMessage { get; set; }
 
     private async Task SendEmails()
     {
-        isSending = true;
+        isLoading = true;
         try
         {
             var emailData = new
@@ -352,7 +79,7 @@ else if (isSent)
         }
         finally
         {
-            isSending = false;
+            isLoading = false;
         }
     }
 
@@ -376,4 +103,5 @@ else if (isSent)
             return false;
         }
     }
-} 
+}
+
