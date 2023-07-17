@@ -478,3 +478,8 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# secrets management vault files
+local.settings.json
+**/properties/serviceDependencies.json
+**/properties/appsettings.json
