@@ -50,7 +50,6 @@ Here is his github repo:
 
 https://github.com/dsanchezcr/ContactFormWithAzure
 
-https://github.com/mikepfeiffer/azure-serverless-contact
 
 This function won't run as you made the change, please, go ahead and edit the local.settings.json file, as I did:
 {
