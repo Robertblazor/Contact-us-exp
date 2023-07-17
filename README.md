@@ -1,2 +1,7 @@
 # Contact-us-exp
-##It's not working yet, the function works great but the binding between the client app and the function is not working.
+##It's working now, and I added some necessary code lines to the corresponding files.
+##Here is a blogpost to state what I did.
+
+https://dev.to/robertblazor/azure-static-web-app-for-a-contact-us-page-ma0
+
+##Hope it can be helpful.
