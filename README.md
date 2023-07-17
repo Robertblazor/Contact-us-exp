@@ -44,7 +44,11 @@ Now, got to your Api folder, type or copy the following commands:
 Type the following command
 'func new --template "HttpTrigger" --name "SendEmail"'
 
-And reference to this repo as I did (Thanks to Mike) for the C# part of the function.
+And reference to this repo as I did (Thanks to David) for the C# part of the function.
+
+Here is his github repo:
+
+https://github.com/dsanchezcr/ContactFormWithAzure
 
 https://github.com/mikepfeiffer/azure-serverless-contact
 
