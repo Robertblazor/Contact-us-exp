@@ -66,6 +66,8 @@ This function won't run as you made the change, please, go ahead and edit the lo
     "CORS": "*"
     }
 }
+
+
 And the serviceDependencies.json to the following:
 {
     "dependencies": {
