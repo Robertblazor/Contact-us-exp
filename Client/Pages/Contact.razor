@@ -69,7 +69,7 @@
                 Message = message
             };
             var client = new HttpClient();
-            var response = await client.PostAsJsonAsync("http://localhost:7071/api/SendEmails", new {name, email, message});
+            var response = await client.PostAsJsonAsync("api/SendEmails", new {name, email, message});
             response.EnsureSuccessStatusCode();
             isSent = true;
         }
