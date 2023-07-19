@@ -481,5 +481,5 @@ $RECYCLE.BIN/
 
 # secrets management vault files
 local.settings.json
-**/properties/serviceDependencies.json
-**/properties/appsettings.json
+properties/serviceDependencies.json
+properties/appsettings.json
