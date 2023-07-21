@@ -52,7 +52,7 @@ https://github.com/dsanchezcr/ContactFormWithAzure
 
 
 This function won't run as you made the change, please, go ahead and edit the local.settings.json file, as I did:
-{
+'{
   "IsEncrypted": false,
   "Values": {
     "AzureWebJobsStorage": "",
@@ -65,11 +65,11 @@ This function won't run as you made the change, please, go ahead and edit the lo
     "LocalHttpPort": 7071,
     "CORS": "*"
     }
-}
+}'
 
 
 And the serviceDependencies.json to the following:
-{
+'{
     "dependencies": {
       "storage1": {
         "type": "storage",
@@ -81,7 +81,7 @@ And the serviceDependencies.json to the following:
         "dynamicId": null
       }
     }
-  }
+  }'
 
 You can test the function with the following CLI
 'func start'
