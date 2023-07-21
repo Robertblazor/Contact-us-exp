@@ -52,7 +52,7 @@ https://github.com/dsanchezcr/ContactFormWithAzure
 
 
 This function won't run as you made the change, please, go ahead and edit the local.settings.json file, as I did:
-```
+```json
 {
   "IsEncrypted": false,
   "Values": {
@@ -70,8 +70,8 @@ This function won't run as you made the change, please, go ahead and edit the lo
 ```
 
 And the serviceDependencies.json to the following:
-```
-'{
+```json
+{
     "dependencies": {
       "storage1": {
         "type": "storage",
@@ -83,7 +83,7 @@ And the serviceDependencies.json to the following:
         "dynamicId": null
       }
     }
-  }'
+  }
 ```
 
 You can test the function with the following CLI
